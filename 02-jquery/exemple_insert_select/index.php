@@ -1,51 +1,30 @@
-<!--  02-jquery\exemple_insert_select\connexion.php -->
-
-<?php
-    require 'connexion.php';
-?>
-
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="ajax.js"></script> -->
-    <title>Ajax Exercice</title>
-</head>
-<body>
-
-<h1>Ajouter un employé</h1>
-
-<form action="" method="post">
-    <label for="prenom">Prenom :</label>
-    <input type="text">
-
-    <input type="submit" value="Ajouter">
-
-</form>
-
-    <ul>
-        <?php
-
-            // $tab = '';
-
-            $resultat = $pdo -> query("SELECT * FROM employes");
-
-            $prenom = $resultat -> fetch(PDO::FETCH_ASSOC);
-
-
-            $tab['resultat'] = '';
-
-            foreach($prenom as $emp) {
-                $tab['resultat'] .= '<li>' . $prenom['prenom'] . '</li>';
-            }
-
-            echo $tab['resultat'];
-        ?>
-    </ul>
-    
-</body>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="ajax.js"></script>
+	</head>
+	<body>
+		
+		<form method="post" action="">
+			<input type="text" id="prenom"  />
+			<input type="submit" id="submit" value="Ajouter" />
+		</form>
+		
+		
+		<table border="1" id="employe">
+		<?php
+			require 'connexion.php';
+			$employes = $pdo -> query("SELECT * FROM employes") -> fetchAll(PDO::FETCH_ASSOC);
+			
+			foreach($employes as $emp){
+				echo '<tr>';
+				echo 	'<td>' . $emp['id_employes'] . '</td>';
+				echo 	'<td>' . $emp['prenom'] . '</td>';
+				echo '</tr>';
+			}
+		?>	
+		</table>
+			
+	<body>
 </html>
